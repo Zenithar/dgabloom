@@ -182,6 +182,16 @@ var configs = []Config{
 			"ru", "info", "biz", "click", "su", "work", "pl", "org", "pw", "xyz",
 		},
 	},
+	{
+		// md5: a9d09406e0982d652b6db291558df71a
+		// sha256:
+		// sample:
+		Seed:  7773,
+		Shift: 7,
+		TLDs: []string{
+			"ru", "info", "biz", "click", "su", "work", "pl", "org", "pw", "xyz",
+		},
+	},
 }
 
 // -----------------------------------------------------------------------------
@@ -211,7 +221,7 @@ func dga(date time.Time, configNr, domainNr uint32) string {
 		t_1 := ((t_0 + 0x27100001) ^ k) & 0xFFFFFFFF
 		t_2 := (ror32(0xB11924E1*(t_1+c.Seed), c.Shift)) & 0xFFFFFFFF
 		t_3 := ((t_2 + 0x27100001) ^ t_1) & 0xFFFFFFFF
-		t_4 := (ror32(0xB11924E1*(day/2+t_3), c.Shift)) & 0xFFFFFFFF
+		t_4 := (ror32(0xB11924E1*(uint32(day/2)+t_3), c.Shift)) & 0xFFFFFFFF
 		t_5 := (0xD8EFFFFF - t_4 + t_3) & 0xFFFFFFFF
 		t_6 := (ror32(0xB11924E1*(month+t_5-0x65CAD), c.Shift)) & 0xFFFFFFFF
 		t_7 := (t_5 + t_6 + 0x27100001) & 0xFFFFFFFF
