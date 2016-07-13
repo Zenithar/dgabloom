@@ -183,10 +183,20 @@ var configs = []Config{
 		},
 	},
 	{
-		// md5: a9d09406e0982d652b6db291558df71a
+		// md5:
 		// sha256:
 		// sample:
 		Seed:  7773,
+		Shift: 7,
+		TLDs: []string{
+			"ru", "info", "biz", "click", "su", "work", "pl", "org", "pw", "xyz",
+		},
+	},
+	{
+		// md5:
+		// sha256:
+		// sample:
+		Seed:  7743,
 		Shift: 7,
 		TLDs: []string{
 			"ru", "info", "biz", "click", "su", "work", "pl", "org", "pw", "xyz",
