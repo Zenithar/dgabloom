@@ -22,3 +22,32 @@ generally used for checking if a given data is present in a dataset.
   * Con :
     * Could generate false negative
     * Could not list all members of a dataset
+
+## DGA Algorithms
+
+  *  [Locky v3](https://github.com/baderj/domain_generation_algorithms/blob/master/locky/dgav3.py) (20 seeds)
+
+## Usage
+
+### Generate the filter
+
+```
+#> dgabloom build -b 365 -a 10
+```
+Generates bloom filter since 365 in the past and 10 days in the future.
+
+### Check if a domain is known as a DGA domain
+
+```
+#> dgabloom check zenithar.org
+zenithar.org,false
+```
+
+### Multiple checks
+
+```
+#> dgabloom check ruoectomayrj.pw hoflddlod.org zenithar.org
+ruoectomayrj.pw,true
+hoflddlod.org,true
+zenithar.org,false
+```
