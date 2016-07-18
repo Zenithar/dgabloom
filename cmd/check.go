@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -15,7 +16,8 @@ var checkCmd = &cobra.Command{
 
 func init() {
 	initCommonFlags(checkCmd)
-	checkCmd.RunE = build
+
+	checkCmd.RunE = check
 }
 
 func check(cmd *cobra.Command, args []string) error {
@@ -29,25 +31,25 @@ func check(cmd *cobra.Command, args []string) error {
 	// Check if bloom filter file exists
 	fileName := viper.GetString("DatabasePath")
 	if _, err := os.Stat(fileName); err == nil {
-		bff, err := os.Open(fileName)
-		if err != nil {
-			panic(err)
+		bff, err2 := os.Open(fileName)
+		if err2 != nil {
+			panic(err2)
 		}
 		defer bff.Close()
 
-		if _, err := bf.ReadFrom(bff); err != nil {
-			panic(err)
+		if _, err3 := bf.ReadFrom(bff); err != nil {
+			panic(err3)
+		}
+	} else {
+		fmt.Println("You must build a filter first, use 'build' command.")
+		return err
+	}
+
+	if len(args) > 0 {
+		for _, domain := range args {
+			fmt.Printf("%s,%v\n", domain, bf.TestString(domain))
 		}
 	}
 
-	// Save bloom filter
-	bff, err := os.Create(fileName)
-	if err != nil {
-		panic(err)
-	}
-	defer bff.Close()
-
-	// Dump to file
-	_, err = bf.WriteTo(bff)
-	return err
+	return nil
 }
