@@ -20,12 +20,18 @@ generally used for checking if a given data is present in a dataset.
     * Quick lookup for checking if the domain is not is the set
 
   * Con :
-    * Could generate false negative
+    * Could generate false positives
     * Could not list all members of a dataset
 
 ## DGA Algorithms
 
   *  [Locky v3](https://github.com/baderj/domain_generation_algorithms/blob/master/locky/dgav3.py) (20 seeds)
+
+## Todo
+
+  - [ ] Redis storage
+  - [ ] gRPC microservice
+  - [ ] HTTP Proxy
 
 ## Usage
 
