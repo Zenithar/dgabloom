@@ -29,7 +29,7 @@ func init() {
 	initCommonFlags(buildCmd)
 
 	buildCmd.Flags().IntVarP(&beforeDayCount, "before", "b", 30, "Sets the number of day before today to generate.")
-	buildCmd.Flags().IntVarP(&beforeDayCount, "after", "a", 10, "Sets the number of day after today to generate.")
+	buildCmd.Flags().IntVarP(&afterDayCount, "after", "a", 10, "Sets the number of day after today to generate.")
 	buildCmd.Flags().BoolVarP(&exportCSV, "csv", "", false, "Export generated data as CSV.")
 
 	buildCmd.RunE = build
@@ -50,7 +50,7 @@ func dgaGenerate(now time.Time, bf *bloom.BloomFilter) {
 				fmt.Printf("%s,%s,%s\n", name, now.Format("2006-01-02"), domain)
 			}
 			// Add to bloom filter
-			bf.AddString(domain)
+			bf.TestAndAddString(domain)
 		}
 	}
 }
